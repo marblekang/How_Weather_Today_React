@@ -9,7 +9,7 @@ export const typeSlice = createSlice({
   initialState,
   reducers: {
     changePageType: (state, action) => {
-      state.value = action.payload;
+      return { ...state, value: action.payload };
     },
   },
 });
