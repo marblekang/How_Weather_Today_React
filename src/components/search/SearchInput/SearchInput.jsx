@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { InputContainer } from "./style";
 import { useDispatch } from "react-redux";
 import { FaSearch } from "react-icons/fa";
@@ -11,18 +11,17 @@ export const SearchInput = () => {
   const [timer, setTimer] = useState(0);
   const setInputValueState = (e) => {
     const { value } = e.target;
-    const regex = /^[a-z|A-Z]+$/;
+    const regex = /^[A-Za-z\s]*$/;
     if (timer) {
       clearTimeout(timer);
     }
     const newTimer = setTimeout(() => {
       if (regex.test(value)) {
         setInputValue(value);
-      } else if (value == "") {
-        setInputValue(value);
       } else {
         alert("영문만 입력 가능합니다.");
       }
+      setInputValue(value);
     }, 50);
     setTimer(newTimer);
   };

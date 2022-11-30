@@ -20,8 +20,9 @@ const DATE_OPTIONS = {
 };
 const TIME_OPTIONS = { hour: "numeric", minute: "numeric" };
 export const PlaceWeather = ({ weather }) => {
-  const location = useLocation();
+  const pageType = useLocation();
   const [currentTime, setCurrentTime] = useState(null);
+  // 1분에 한번씩 시간 업데이트.
   const getTime = () => {
     setCurrentTime(new Date());
     const timer = setInterval(() => {
@@ -37,7 +38,7 @@ export const PlaceWeather = ({ weather }) => {
       {weather ? (
         <Container url={loadWeatherImg(weather.main)}>
           <AlignContainer justifyContent={"flex-end"}>
-            <Text fontSize={"1.5rem"}>{weather.currentLocation}</Text>
+            <Text fontSize={"1.5rem"}>{weather.name}</Text>
           </AlignContainer>
           <TextContainer>
             <Text fontSize={"1.5rem"}>
@@ -53,7 +54,7 @@ export const PlaceWeather = ({ weather }) => {
           </TextContainer>
         </Container>
       ) : (
-        location.pathname === "/" && (
+        pageType.pathname === "/" && (
           <MarginBox>
             <CircularProgress isIndeterminate />
           </MarginBox>

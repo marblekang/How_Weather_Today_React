@@ -6,11 +6,12 @@ const REACT_APP_API_KEY = process.env.REACT_APP_API_KEY;
 
 export const getWeatherData = async (params, requestWeatherData) => {
   let response = await requestWeatherData(params);
-  const currentLocation = response.name;
-  const { feels_like, temp, temp_max, temp_min } = response.main;
+  const { name } = response;
+  const { temp } = response.main;
   const { main } = response.weather[0];
-  return { currentLocation, feels_like, temp, temp_max, temp_min, main };
+  return { name, temp, main };
 };
+// 사용 안할 데이터도 가져왔었음. 수정해야함.
 
 export const setWeatherState = (params, setState) => {
   setState({ ...params });
